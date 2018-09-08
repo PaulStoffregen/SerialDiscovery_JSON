@@ -59,7 +59,7 @@ int main()
 	struct udev_device *dev;
 	const char *path, *action;
 
-	printf("begin SerialDiscovery\n");
+	//printf("begin SerialDiscovery\n");
 
 	udev = udev_new();
 	if (!udev) die("unable to use udev");
