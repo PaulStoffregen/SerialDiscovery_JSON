@@ -82,11 +82,12 @@ int main()
 		dev = udev_monitor_receive_device(mon);
 		if (!dev) continue;
 		action = udev_device_get_action(dev);
-		if (!action) continue;
-		if (strcmp(action, "add") == 0) {
-			add(dev);
-		} else if (strcmp(action, "remove") == 0) {
-			del(dev);
+		if (action) {
+			if (strcmp(action, "add") == 0) {
+				add(dev);
+			} else if (strcmp(action, "remove") == 0) {
+				del(dev);
+			}
 		}
 		udev_device_unref(dev);
 	}
