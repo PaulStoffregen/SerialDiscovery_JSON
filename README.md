@@ -1,8 +1,8 @@
 # SerialDiscovery
 
-A simple proof-of-concept board discovery tool with JSON output.  See Arduino issue #7964.
+A simple proof-of-concept board discovery tool with JSON output.  See Arduino issue #7942.
 
-https://github.com/arduino/Arduino/pull/7964
+https://github.com/arduino/Arduino/pull/7942
 
 # Sample JSON Output
 
