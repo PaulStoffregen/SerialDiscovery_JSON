@@ -49,6 +49,7 @@ void del(struct udev_device *dev)
 	devnode = udev_device_get_devnode(dev);
 	if (!devnode) return;
 	printf("{\n  \"address\": \"%s\",\n  \"online\": false\n}\n", devnode); 
+	fflush(stdout);
 }
 
 int main()
