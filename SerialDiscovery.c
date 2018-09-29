@@ -39,6 +39,7 @@ void add(struct udev_device *dev)
 		 printf("  \"iserial\": \"%s\",\n", ser);
 	}
 	printf("  \"protocol\": \"Serial Device\"\n}\n"); // probably not correct
+	fflush(stdout);
 }
 
 void del(struct udev_device *dev)
