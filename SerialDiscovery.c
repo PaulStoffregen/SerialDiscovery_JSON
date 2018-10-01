@@ -22,6 +22,12 @@ void add(struct udev_device *dev)
 	pid = udev_device_get_sysattr_value(pdev, "idProduct");
 	ser = udev_device_get_sysattr_value(pdev, "serial");
 	name = udev_device_get_sysattr_value(pdev, "product");
+	// Prepend an underscore '_' to the address field, so our address
+	// names will be unique and not conflict with those from normal
+	// SerialDiscovery.java.  Long-term, we're going to need to figure
+	// out a way for the Arduino IDE to deal with non-unique address
+	// names.  Maybe also track which discoverer, so they only need to
+	// be unique within one discoverer instance?
 	printf("{\n  \"eventType\": \"add\",\n  \"address\": \"_%s\",\n", devnode);
 	if (name) {
 		printf("  \"label\": \"%s (%s)\",\n", devnode, name);
