@@ -22,7 +22,7 @@ void add(struct udev_device *dev)
 	pid = udev_device_get_sysattr_value(pdev, "idProduct");
 	ser = udev_device_get_sysattr_value(pdev, "serial");
 	name = udev_device_get_sysattr_value(pdev, "product");
-	printf("{\n  \"address\": \"%s\",\n  \"online\": true,\n", devnode);
+	printf("{\n  \"eventType\": \"add\",\n  \"address\": \"%s\",\n", devnode);
 	if (name) {
 		printf("  \"label\": \"%s (%s)\",\n", devnode, name);
 		printf("  \"boardName\": \"%s\",\n", name);
@@ -48,7 +48,7 @@ void del(struct udev_device *dev)
 
 	devnode = udev_device_get_devnode(dev);
 	if (!devnode) return;
-	printf("{\n  \"address\": \"%s\",\n  \"online\": false\n}\n", devnode); 
+	printf("{\n  \"eventType\": \"remove\",\n  \"address\": \"%s\"\n}\n", devnode);
 	fflush(stdout);
 }
 
