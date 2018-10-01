@@ -47,7 +47,7 @@ This JSON output was generated with 3 boards connected, generating the first 3 J
 }
 {
   "eventType": "remove",
-  "address": "/dev/ttyACM1"
+  "address": "_/dev/ttyACM1"
 }
 {
   "eventType": "add",

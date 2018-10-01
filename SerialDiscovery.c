@@ -56,7 +56,7 @@ void del(struct udev_device *dev)
 
 	devnode = udev_device_get_devnode(dev);
 	if (!devnode) return;
-	printf("{\n  \"eventType\": \"remove\",\n  \"address\": \"%s\"\n}\n", devnode);
+	printf("{\n  \"eventType\": \"remove\",\n  \"address\": \"_%s\"\n}\n", devnode);
 	fflush(stdout);
 }
 
