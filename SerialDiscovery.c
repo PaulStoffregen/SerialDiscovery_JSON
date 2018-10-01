@@ -22,21 +22,29 @@ void add(struct udev_device *dev)
 	pid = udev_device_get_sysattr_value(pdev, "idProduct");
 	ser = udev_device_get_sysattr_value(pdev, "serial");
 	name = udev_device_get_sysattr_value(pdev, "product");
-	printf("{\n  \"eventType\": \"add\",\n  \"address\": \"%s\",\n", devnode);
+	printf("{\n  \"eventType\": \"add\",\n  \"address\": \"_%s\",\n", devnode);
 	if (name) {
 		printf("  \"label\": \"%s (%s)\",\n", devnode, name);
 		printf("  \"boardName\": \"%s\",\n", name);
 	} else {
 		printf("  \"label\": \"%s\",\n", devnode);
 	}
-	if (vid) {
-		 printf("  \"vid\": \"%s\",\n", vid);
-	}
-	if (pid) {
-		 printf("  \"pid\": \"%s\",\n", pid);
-	}
-	if (ser) {
-		 printf("  \"iserial\": \"%s\",\n", ser);
+	if (vid || pid || ser) {
+		printf("  \"prefs\": {\n");
+		if (vid) {
+			printf("    \"vendorId\": \"%s\"", vid);
+			if (pid || ser) printf(",");
+			printf("\n");
+		}
+		if (pid) {
+			printf("    \"productId\": \"%s\"", pid);
+			if (ser) printf(",");
+			printf("\n");
+		}
+		if (ser) {
+			printf("    \"serialNumber\": \"%s\"\n", ser);
+		}
+		printf("  },\n");
 	}
 	printf("  \"protocol\": \"Serial Device\"\n}\n"); // probably not correct
 	fflush(stdout);
