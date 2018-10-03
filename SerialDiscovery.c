@@ -52,6 +52,12 @@ void add(struct udev_device *dev)
 		}
 		printf("  },\n");
 	}
+	if (vid && pid) {
+		printf("  \"identificationPrefs\": {\n");
+		printf("    \"vid\": \"0x%s\",\n", vid);
+		printf("    \"pid\": \"0x%s\"\n", pid);
+		printf("  },\n");
+	}
 	printf("  \"protocol\": \"Serial Device\"\n}\n"); // probably not correct
 	fflush(stdout);
 }
