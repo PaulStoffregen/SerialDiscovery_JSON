@@ -36,12 +36,12 @@ void add(struct udev_device *dev)
 	if (vid || pid || ser) {
 		printf("    \"prefs\": {\n");
 		if (vid) {
-			printf("      \"vendorId\": \"%s\"", vid);
+			printf("      \"vendorId\": \"0x%s\"", vid);
 			if (pid || ser) printf(",");
 			printf("\n");
 		}
 		if (pid) {
-			printf("      \"productId\": \"%s\"", pid);
+			printf("      \"productId\": \"0x%s\"", pid);
 			if (ser) printf(",");
 			printf("\n");
 		}
