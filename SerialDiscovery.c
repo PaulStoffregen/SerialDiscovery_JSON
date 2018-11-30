@@ -26,13 +26,7 @@ void add(struct udev_device *dev)
 	printf("{\n");
 	printf("  \"eventType\": \"add\",\n");
 	printf("  \"port\": {\n");
-	// Prepend an underscore '_' to the address field, so our address
-	// names will be unique and not conflict with those from normal
-	// SerialDiscovery.java.  Long-term, we're going to need to figure
-	// out a way for the Arduino IDE to deal with non-unique address
-	// names.  Maybe also track which discoverer, so they only need to
-	// be unique within one discoverer instance?
-	printf("    \"address\": \"_%s\",\n", devnode);
+	printf("    \"address\": \"%s\",\n", devnode);
 	if (name) {
 		printf("    \"label\": \"%s (%s)\",\n", devnode, name);
 		printf("    \"boardName\": \"%s\",\n", name);
@@ -77,7 +71,7 @@ void del(struct udev_device *dev)
 	printf("{\n");
 	printf("  \"eventType\": \"remove\",\n");
 	printf("  \"port\": {\n");
-	printf("    \"address\": \"_%s\"\n", devnode);
+	printf("    \"address\": \"%s\"\n", devnode);
 	printf("  }\n");
 	printf("}\n");
 	fflush(stdout);
