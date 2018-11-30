@@ -56,7 +56,8 @@ void add(struct udev_device *dev)
 		printf("      \"pid\": \"0x%s\"\n", pid);
 		printf("    },\n");
 	}
-	printf("    \"protocol\": \"serial\"\n");
+	printf("    \"protocol\": \"serial\",\n");
+	printf("    \"protocolLabel\": \"USB Serial Port\"\n");
 	printf("  }\n");
 	printf("}\n");
 	fflush(stdout);
