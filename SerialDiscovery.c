@@ -22,43 +22,49 @@ void add(struct udev_device *dev)
 	pid = udev_device_get_sysattr_value(pdev, "idProduct");
 	ser = udev_device_get_sysattr_value(pdev, "serial");
 	name = udev_device_get_sysattr_value(pdev, "product");
+
+	printf("{\n");
+	printf("  \"eventType\": \"add\",\n");
+	printf("  \"port\": {\n");
 	// Prepend an underscore '_' to the address field, so our address
 	// names will be unique and not conflict with those from normal
 	// SerialDiscovery.java.  Long-term, we're going to need to figure
 	// out a way for the Arduino IDE to deal with non-unique address
 	// names.  Maybe also track which discoverer, so they only need to
 	// be unique within one discoverer instance?
-	printf("{\n  \"eventType\": \"add\",\n  \"address\": \"_%s\",\n", devnode);
+	printf("    \"address\": \"_%s\",\n", devnode);
 	if (name) {
-		printf("  \"label\": \"%s (%s)\",\n", devnode, name);
-		printf("  \"boardName\": \"%s\",\n", name);
+		printf("    \"label\": \"%s (%s)\",\n", devnode, name);
+		printf("    \"boardName\": \"%s\",\n", name);
 	} else {
-		printf("  \"label\": \"%s\",\n", devnode);
+		printf("    \"label\": \"%s\",\n", devnode);
 	}
 	if (vid || pid || ser) {
-		printf("  \"prefs\": {\n");
+		printf("    \"prefs\": {\n");
 		if (vid) {
-			printf("    \"vendorId\": \"%s\"", vid);
+			printf("      \"vendorId\": \"%s\"", vid);
 			if (pid || ser) printf(",");
 			printf("\n");
 		}
 		if (pid) {
-			printf("    \"productId\": \"%s\"", pid);
+			printf("      \"productId\": \"%s\"", pid);
 			if (ser) printf(",");
 			printf("\n");
 		}
 		if (ser) {
-			printf("    \"serialNumber\": \"%s\"\n", ser);
+			printf("      \"serialNumber\": \"%s\"\n", ser);
 		}
-		printf("  },\n");
+		printf("    },\n");
 	}
 	if (vid && pid) {
-		printf("  \"identificationPrefs\": {\n");
-		printf("    \"vid\": \"0x%s\",\n", vid);
-		printf("    \"pid\": \"0x%s\"\n", pid);
-		printf("  },\n");
+		printf("    \"identificationPrefs\": {\n");
+		printf("      \"vid\": \"0x%s\",\n", vid);
+		printf("      \"pid\": \"0x%s\"\n", pid);
+		printf("    },\n");
 	}
-	printf("  \"protocol\": \"serial\"\n}\n");
+	printf("    \"protocol\": \"serial\"\n");
+	printf("  }\n");
+	printf("}\n");
 	fflush(stdout);
 }
 
@@ -68,7 +74,12 @@ void del(struct udev_device *dev)
 
 	devnode = udev_device_get_devnode(dev);
 	if (!devnode) return;
-	printf("{\n  \"eventType\": \"remove\",\n  \"address\": \"_%s\"\n}\n", devnode);
+	printf("{\n");
+	printf("  \"eventType\": \"remove\",\n");
+	printf("  \"port\": {\n");
+	printf("    \"address\": \"_%s\"\n", devnode);
+	printf("  }\n");
+	printf("}\n");
 	fflush(stdout);
 }
 
