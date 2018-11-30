@@ -58,7 +58,7 @@ void add(struct udev_device *dev)
 		printf("    \"pid\": \"0x%s\"\n", pid);
 		printf("  },\n");
 	}
-	printf("  \"protocol\": \"Serial Device\"\n}\n"); // probably not correct
+	printf("  \"protocol\": \"serial\"\n}\n");
 	fflush(stdout);
 }
 
